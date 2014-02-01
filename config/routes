@@ -1,0 +1,8 @@
+/static                   StaticR Static appStatic
+/                         HomeR        GET
+/start-time               StartTimeR   GET
+/review/#Text             ReviewR      GET POST
+/help                     HelpR        GET
+/import                   ImportR      GET POST
+/datasources              DatasourcesR GET
+/export/#Text/#ExportType ExportR      GET

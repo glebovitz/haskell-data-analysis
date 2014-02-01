@@ -1,0 +1,40 @@
+$doctype 5
+<html>
+  <head>
+    <title>#{pageTitle pc}
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
+    <link href="//fonts.googleapis.com/css?family=Actor"
+          rel="stylesheet" type="text/css">
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src=@{StaticR excanvas_min_js}></script><![endif]-->
+    ^{pageHead pc}
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar">
+            <span class="icon-bar">
+            <span class="icon-bar">
+          <a class="brand" href="http://fpcomplete.com/">
+            <img src="//fpcomplete.com/static/img/ide-logo.png" title="FP Complete">
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              $forall route <- [HelpR,ImportR,DatasourcesR]
+                $maybe current <- currentRoute
+                  $if route == current
+                    <li .active>
+                      <a href=@{route}>#{route}
+                  $else
+                    <li>
+                      <a href=@{route}>#{route}
+                $nothing
+                  <li>
+                      <a href=@{route}>#{route}
+    <div class="container">
+      <ul class="breadcrumb">
+        <li class="active">
+          #{appTitle}
+      ^{pageBody pc}
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>

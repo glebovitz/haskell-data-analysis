@@ -1,0 +1,9 @@
+<h1>Data Sources
+$if null sources
+  <p>No sources have been imported yet.
+$else
+  <p>Below is a list of data sources that you have imported for the current analysis:
+  <ul>
+    $forall source <- sources
+      <li>
+        <a href=@{ReviewR (srcName source)}>#{show (srcTimestamp source)}

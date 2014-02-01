@@ -1,0 +1,105 @@
+$(function(){
+    setupChartChoices();
+    setupAutoReload();
+});
+
+// Make the page reload when the server has restarted
+function setupAutoReload() {
+    var lastTime = null;
+    setInterval(function(){
+        $.get('/start-time',function(t){
+            if(lastTime && lastTime !== t) {
+                window.location.reload();
+            } else {
+                lastTime = t;
+            }
+        });
+    },1000);
+}
+
+// Setup the charts list of choices
+function setupChartChoices(){
+    $('#chart').hide();
+    var list = $('#chart-choices');
+    var data = $('#placeholder').data('data-points');
+    function choice(title,onclick){
+        list.append($('<li></li>')
+                    .append($('<a href="#"></a>')
+                            .text(title)
+                            .click(onclick)));
+    }
+    choice('Bar',makeChart('Bar',data));
+    choice('Line',makeChart('Line',data));
+    choice('Pie',makeChart('Pie',data));
+    makeChart($('#graph_type').val(),data,true)();
+}
+
+// Make a chart of the given type
+function makeChart(type,data,first){
+    return function(e){
+        $('#graph_type').val(type);
+        var groups = Object.create(null);
+        var mode = undefined;
+        for (var i = 0, len = data.length; i < len; i++) {
+            var datum = data[i];
+            var group = data[2] || 0;
+            groups[group] = groups[group] || [];
+            var label = datum[0];
+            var value = datum[1];
+            var labeln = parseFloat(label);
+            if (false) {
+                label = labeln;
+            } else {
+                mode = "categories";
+            }
+            groups[group].push([label,value]);
+        }
+        var groupList = [];
+        for (var group in groups) {
+            groupList.push(groups[group]);
+        }
+        if (type === 'Bar') {
+            $.plot("#placeholder", groupList, {
+		series: {
+		    bars: {
+			show: true,
+			barWidth: 0.6,
+			align: "center"
+		    }
+		},
+		xaxis: {
+		    mode: mode,
+		    tickLength: 0,
+                    show: groupList[0].length <= 20
+		}
+	    });
+        } else if (type === 'Line') {
+	    $.plot("#placeholder", groupList,{
+                xaxis: {
+                    mode: mode,
+                    show: groupList[0].length <= 20
+                }
+            });
+        } else if (type == 'Pie') {
+            var series = [];
+            for (var i = 0, len = groupList[0].length; i < len; i++) {
+                series.push({ label: groupList[0][i][0],
+                              data: groupList[0][i][1]
+                            });
+            }
+            $.plot('#placeholder', series, {
+                series: {
+                    pie: {
+                        show: true,
+                        label: { show: series.length < 20 }
+                    }
+                },
+                legend: {
+                    show: series.length <= 20
+                }
+            });
+        }
+        if(e) e.preventDefault();
+        return true;
+    }
+}

@@ -1,0 +1,11 @@
+*.o
+*.hi
+*~
+dist/
+cabal-dev/
+.hsenv
+TAGS
+tags
+*.tag
+*.swp
+client_session_key.aes

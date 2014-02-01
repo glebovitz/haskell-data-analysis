@@ -1,0 +1,9 @@
+<h1>Import
+
+<p>To import from a file, specify it below and hit Import.
+
+<h3>File
+
+<form method=post action=@{ImportR} enctype=#{formEncType} .file-upload>
+  ^{formWidget}
+  <input type="submit" value="Upload">

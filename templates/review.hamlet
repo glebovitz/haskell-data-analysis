@@ -1,0 +1,47 @@
+<h1>#{title}
+
+<div .row>
+  <div .span6>
+    <div .well>
+      <h2>Parameters
+      <form method=get action=@{ReviewR ident} enctype=#{enctype}>
+        ^{widget}
+        <button>Update
+  <div .span6>
+    <p>#{toHtml (showCount rowsProcessed)} records processed in #{toHtml (show generationTime)}.
+    <h2>Export
+    <div .btn-group>
+      <a .btn .dropdown-toggle data-toggle="dropdown" href="#">
+        Download
+        <span .caret>
+      <ul .dropdown-menu>
+        <li>
+          <a href=@{ExportR ident CsvData}>CSV
+        <li>
+          <a href=@{ExportR ident XmlData}>XML
+
+<div .row>
+  <div .span12 #chart-span>
+     <div .well>
+       <h2>Chart
+       <div .btn-group>
+         <a .btn .dropdown-toggle data-toggle="dropdown" href="#">
+           Chart
+           <span .caret>
+         <ul .dropdown-menu #chart-choices>
+       <div #placeholder data-data-points=#{datapointsJson}>
+
+<div .row>
+  <div .span12>
+    <div .well>
+      <h2>Analysis datapoints sample
+      <ul>
+        $forall datapoint <- take 20 datapoints
+          <li>
+            <span .code>
+              #{toHtml (show datapoint)}
+
+<script src=@{StaticR flot_jquery_js}>
+<script src=@{StaticR flot_jquery_flot_js}>
+<script src=@{StaticR flot_jquery_flot_categories_js}>
+<script src=@{StaticR flot_jquery_flot_pie_js}>
