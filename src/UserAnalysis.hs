@@ -1,8 +1,8 @@
 -- This is the module where an end user writes the actual domain specific analysis.
 {-# LANGUAGE OverloadedStrings #-}
-module Skel.RSI.UserAnalysis (userAnalysis) where
+module UserAnalysis (userAnalysis) where
 
-import           Skel.RSI.UserParameters
+import           UserParameters
 
 -- The following is an implementation of relative strength index.
 -- For more information, see: http://en.wikipedia.org/wiki/Relative_strength_index

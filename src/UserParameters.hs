@@ -1,8 +1,8 @@
 -- This module controls the parameters that the analysis accepts from a user.
 -- In the near future, this will be replaced by a higher level DSL.
 {-# LANGUAGE OverloadedStrings #-}
-module Skel.RSI.UserParameters
-    ( module Skel.RSI.UserParameters
+module UserParameters
+    ( module UserParameters
     , module UserModel
     , module DataAnalysis.Application.Import
     ) where
